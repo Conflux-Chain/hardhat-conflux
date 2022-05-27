@@ -1,5 +1,6 @@
 import { extendEnvironment } from "hardhat/config";
 import { lazyObject } from "hardhat/plugins";
+import { JsonRpcRequest, JsonRpcResponse } from "hardhat/types/provider";
 import { 
   Conflux, 
   format,
@@ -37,17 +38,19 @@ extendEnvironment((hre) => {
   hre.conflux = lazyObject(() => {
     // Create contract instance
     const chainId = hre.network.config.chainId || 0;
+    // @ts-ignore
+    const url = hre.network.config.url;
     const conflux = new Conflux({
       networkId: chainId,
+      url,
     });
     // @ts-ignore
-    conflux.provider = hre.network.provider;
     // Setup accounts
     let accounts = hre.network.config.accounts;
     if (Array.isArray(accounts)) {
       for(let account of accounts) {
         // @ts-ignore
-        conflux.wallet.addPrivateKey(account.privateKey);
+        conflux.wallet.addPrivateKey(account);
       }
     } else {
       // TODO:

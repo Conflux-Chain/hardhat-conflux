@@ -62,3 +62,4 @@ typings/
 # environment variables
 .env
 target.md
+test/fixture-projects/hardhat-project/cache/

@@ -1,58 +1,76 @@
-# Hardhat TypeScript plugin boilerplate
+# hardhat-conflux
 
-This is a sample Hardhat plugin written in TypeScript. Creating a Hardhat plugin
-can be as easy as extracting a part of your config into a different file and
-publishing it to npm.
+Hardhat plugin for integration with `js-conflux-sdk`
 
-This sample project contains an example on how to do that, but also comes with
-many more features:
+## What
 
-- A mocha test suite ready to use
-- TravisCI already setup
-- A package.json with scripts and publishing info
-- Examples on how to do different things
+This plugin brings to Hardhat the `js-conflux-sdk`, which allows you to interact with the `Conflux` blockchain in a simple way.
 
 ## Installation
 
-To start working on your project, just run
-
 ```bash
-npm install
+npm install hardhat-conflux 'js-conflux-sdk@next'
 ```
 
-## Plugin development
+Import the plugin in your `hardhat.config.js`:
 
-Make sure to read our [Plugin Development Guide](https://hardhat.org/advanced/building-plugins.html) to learn how to build a plugin.
+```js
+require("hardhat-conflux");
+```
 
-## Testing
+Or if you are using TypeScript, in your `hardhat.config.ts`:
 
-Running `npm run test` will run every test located in the `test/` folder. They
-use [mocha](https://mochajs.org) and [chai](https://www.chaijs.com/),
-but you can customize them.
+```ts
+import "hardhat-conflux";
+```
 
-We recommend creating unit tests for your own modules, and integration tests for
-the interaction of the plugin with Hardhat and its dependencies.
+## Tasks
 
-## Linting and autoformat
+This plugin creates no additional tasks.
 
-All of Hardhat projects use [prettier](https://prettier.io/) and
-[tslint](https://palantir.github.io/tslint/).
+## Environment extensions
 
-You can check if your code style is correct by running `npm run lint`, and fix
-it with `npm run lint:fix`.
+This plugins adds an `ConfluxSDK` object to the Hardhat Runtime Environment.
 
-## Building the project
+This object has the same API as `js-conflux-sdk`, with some extra Hardhat-specific functionality.
 
-Just run `npm run build` ️👷
+### Conflux object
 
-## README file
+A `conflux` field is added to Hardhat Runtime Environment, which is an `Conflux` instance automatically connected to the selected network.
 
-This README describes this boilerplate project, but won't be very useful to your
-plugin users.
+### Helpers
 
-Take a look at `README-TEMPLATE.md` for an example of what a Hardhat plugin's
-README should look like.
+These helpers are added to the `conflux` object:
 
-## Migrating from Buidler?
+```js
+function getContractFactory(name: string): Promise<conflux.Contract>;
 
-Take a look at [the migration guide](MIGRATION.md)!
+function getContractFactory(abi: any[], bytecode: string): Promise<conflux.Contract>;
+
+function getContractAt(name: string, address: string): Promise<conflux.Contract>;
+
+function getContractAt(abi: any[], address: string): Promise<conflux.Contract>;
+```
+
+## Usage
+
+There are no additional steps you need to take for this plugin to work.
+
+Install it and access ethers through the Hardhat Runtime Environment anywhere you need it (tasks, scripts, tests, etc). For example, in your hardhat.config.js:
+
+```js
+require("hardhat-conflux");
+
+// task action function receives the Hardhat Runtime Environment as second argument
+task(
+  "epochNumber",
+  "Prints the current Conflux epoch number",
+  async (_, { conflux }) => {
+    conflux.cfx.epochNumber().then((epochNumber) => {
+      console.log("Current epoch number: " + epochNumber);
+    });
+  }
+);
+
+module.exports = {};
+```
