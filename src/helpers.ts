@@ -1,10 +1,9 @@
 import {
   Artifact,
   HardhatRuntimeEnvironment,
-  NetworkConfig,
 } from "hardhat/types";
 import { NomicLabsHardhatPluginError } from "hardhat/plugins";
-import { Contract, Conflux } from "js-conflux-sdk";
+import { Contract } from "js-conflux-sdk";
 
 const pluginName = "hardhat-conflux";
 

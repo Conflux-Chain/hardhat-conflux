@@ -2,11 +2,9 @@
 import { assert } from "chai";
 import path from "path";
 
-import { ExampleHardhatRuntimeEnvironmentField } from "../src/ExampleHardhatRuntimeEnvironmentField";
-
 import { useEnvironment } from "./helpers";
 
-describe("Integration tests examples", function () {
+/* describe("Integration tests examples", function () {
   describe("Hardhat Runtime Environment extension", function () {
     useEnvironment("hardhat-project");
 
@@ -43,4 +41,4 @@ describe("Unit tests examples", function () {
       });
     });
   });
-});
+}); */

@@ -45,7 +45,5 @@
   "peerDependencies": {
     "hardhat": "^2.0.0"
   },
-  "dependencies": {
-    "js-conflux-sdk": "^2.1.1"
-  }
+  "dependencies": {}
 }
