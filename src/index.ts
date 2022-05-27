@@ -2,8 +2,22 @@ import { extendConfig, extendEnvironment } from "hardhat/config";
 import { lazyObject } from "hardhat/plugins";
 import { HardhatConfig, HardhatUserConfig } from "hardhat/types";
 import path from "path";
+import { 
+  Conflux, 
+  format,
+  Drip, 
+  sign,
+  PrivateKeyAccount,
+  address,
+  PersonalMessage,
+  Message,
+  Transaction
+} from "js-conflux-sdk";
+import {
+  getContractAt,
+  getContractFactory,
+} from './helpers';
 
-import { ExampleHardhatRuntimeEnvironmentField } from "./ExampleHardhatRuntimeEnvironmentField";
 // This import is needed to let the TypeScript compiler know that it should include your type
 // extensions in your npm package's types file.
 import "./type-extensions";
@@ -42,8 +56,44 @@ extendConfig(
 );
 
 extendEnvironment((hre) => {
-  // We add a field to the Hardhat Runtime Environment here.
-  // We use lazyObject to avoid initializing things until they are actually
-  // needed.
-  hre.example = lazyObject(() => new ExampleHardhatRuntimeEnvironmentField());
+
+  hre.ConfluxSDK = lazyObject(() => {
+    return {
+      Conflux: Conflux,
+      format: format,
+      Drip: Drip,
+      sign: sign,
+      PrivateKeyAccount: PrivateKeyAccount,
+      address: address,
+      PersonalMessage: PersonalMessage,
+      Message: Message,
+      Transaction: Transaction
+    };
+  });
+
+  hre.conflux = lazyObject(() => {
+    // Create contract instance
+    const chainId = hre.network.config.chainId || 0;
+    const conflux = new Conflux({
+      networkId: chainId,
+    });
+    conflux.provider = hre.network.provider;
+    // Setup accounts
+    let accounts = hre.network.config.accounts;
+    if (Array.isArray(accounts)) {
+      for(let account of accounts) {
+        // @ts-ignore
+        conflux.wallet.addPrivateKey(account.privateKey);
+      }
+    } else {
+      // TODO:
+      // HD wallet
+    }
+    // @ts-ignore
+    conflux.getContractAt = getContractAt.bind(null, hre);
+    // @ts-ignore
+    conflux.getContractFactory = getContractFactory.bind(null, hre);
+    return conflux;
+  });
+
 });

@@ -5,6 +5,29 @@ import "hardhat/types/config";
 import "hardhat/types/runtime";
 
 import { ExampleHardhatRuntimeEnvironmentField } from "./ExampleHardhatRuntimeEnvironmentField";
+import { 
+  Conflux, 
+  format, 
+  Drip, 
+  sign,
+  PrivateKeyAccount,
+  address,
+  PersonalMessage,
+  Message,
+  Transaction
+} from "js-conflux-sdk";
+
+interface JSConfluxSDK {
+  Conflux: typeof Conflux;
+  format: typeof format;
+  Drip: typeof Drip;
+  sign: typeof sign;
+  PrivateKeyAccount: typeof PrivateKeyAccount;
+  address: typeof address;
+  PersonalMessage: typeof PersonalMessage;
+  Message: typeof Message;
+  Transaction: typeof Transaction;
+}
 
 declare module "hardhat/types/config" {
   // This is an example of an extension to one of the Hardhat config values.
@@ -30,5 +53,7 @@ declare module "hardhat/types/runtime" {
   // This new field will be available in tasks' actions, scripts, and tests.
   export interface HardhatRuntimeEnvironment {
     example: ExampleHardhatRuntimeEnvironmentField;
+    ConfluxSDK: JSConfluxSDK;
+    conflux: Conflux;
   }
 }
