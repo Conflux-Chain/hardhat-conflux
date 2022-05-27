@@ -86,3 +86,27 @@ task(
 
 module.exports = {};
 ```
+
+And deploy or interact with contract in tasks or scripts:
+
+```js
+const signers = await hre.conflux.getSingers();
+const defaultAccount = signers[0];
+// deploy contract
+const Greeter = await hre.conflux.getContractFactory('Greeter');
+const receipt = await Greeter.constructor('Hello').sendTransaction({
+  from: defaultAccount.address,
+}).executed();
+console.log(`Contract deploy ${receipt.outcomeStatus === 0 ? 'Success' : 'Failed'}`);
+const contractAddress = receipt.contractCreated;
+console.log(`New deployed contract address: ${contractAddress}`);
+
+// interact with contract
+const greeter = await hre.conflux.getContractAt('Greeter', contractAddress);
+// read contract state
+const greet = await greeter.greet();
+// update contract state through sending transaction
+const hash = await greeter.setGreeting('new greet').sendTransaction({
+  from: defaultAccount.address,
+});
+```
