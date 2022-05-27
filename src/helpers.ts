@@ -3,7 +3,7 @@ import {
   HardhatRuntimeEnvironment,
 } from "hardhat/types";
 import { NomicLabsHardhatPluginError } from "hardhat/plugins";
-import { Contract } from "js-conflux-sdk";
+import { Contract, PrivateKeyAccount } from "js-conflux-sdk";
 
 const pluginName = "hardhat-conflux";
 
@@ -28,6 +28,37 @@ function isArtifact(artifact: any): artifact is Artifact {
     deployedLinkReferences !== undefined
   );
 }
+
+export async function getSigners(
+  hre: HardhatRuntimeEnvironment
+): Promise<PrivateKeyAccount[]> {
+  const accounts = hre.network.config.accounts;
+  if (!Array.isArray(accounts)) {
+    throw new NomicLabsHardhatPluginError(
+      pluginName,
+      `Only private key accounts are supported.`
+    );
+  }
+
+  const chainId = hre.network.config.chainId;
+  // @ts-ignore
+  return accounts.map((privateKey) => new PrivateKeyAccount(privateKey, chainId as number));
+}
+
+/* export async function getSigner(
+  hre: HardhatRuntimeEnvironment,
+  address: string
+): Promise<SignerWithAddress> {
+  const { SignerWithAddress: SignerWithAddressImpl } = await import(
+    "../signers"
+  );
+
+  const signer = hre.ethers.provider.getSigner(address);
+
+  const signerWithAddress = await SignerWithAddressImpl.create(signer);
+
+  return signerWithAddress;
+} */
 
 export function getContractFactory(
   hre: HardhatRuntimeEnvironment,

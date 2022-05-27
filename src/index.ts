@@ -1,6 +1,6 @@
 import { extendEnvironment } from "hardhat/config";
 import { lazyObject } from "hardhat/plugins";
-import { JsonRpcRequest, JsonRpcResponse } from "hardhat/types/provider";
+import { NomicLabsHardhatPluginError } from "hardhat/plugins";
 import { 
   Conflux, 
   format,
@@ -15,6 +15,7 @@ import {
 import {
   getContractAt,
   getContractFactory,
+  getSigners,
 } from './helpers';
 
 import "./type-extensions";
@@ -53,13 +54,15 @@ extendEnvironment((hre) => {
         conflux.wallet.addPrivateKey(account);
       }
     } else {
-      // TODO:
-      // HD wallet
+      // TODO: HD wallet
+      throw new NomicLabsHardhatPluginError('hardhat-conflux', 'HD wallet is not supported yet.');
     }
     // @ts-ignore
     conflux.getContractAt = getContractAt.bind(null, hre);
     // @ts-ignore
     conflux.getContractFactory = getContractFactory.bind(null, hre);
+    // @ts-ignore
+    conflux.getSigners = getSigners.bind(null, hre);
     return conflux;
   });
 

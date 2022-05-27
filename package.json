@@ -1,17 +1,17 @@
 {
-  "name": "hardhat-ts-plugin-boilerplate",
+  "name": "hardhat-conflux",
   "version": "0.0.1",
-  "description": "Hardhat TypeScript plugin boilerplate",
+  "description": "Hardhat js-conflux-sdk plugin",
   "repository": "github:nomiclabs/hardhat-ts-plugin-boilerplate",
-  "author": "Nomic Labs LLC",
+  "author": "Pana.W<pana.wang@outlook.com>",
   "license": "MIT",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "keywords": [
-    "ethereum",
+    "conflux",
     "smart-contracts",
     "hardhat",
-    "hardhat-plugin"
+    "js-conflux-sdk"
   ],
   "scripts": {
     "lint:fix": "prettier --write 'src/**/*.{js,ts}' 'test/**/*.{js,ts}' && tslint --fix --config tslint.json --project tsconfig.json",

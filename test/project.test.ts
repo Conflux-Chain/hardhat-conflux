@@ -28,7 +28,14 @@ describe("Integration tests", function () {
       assert.equal(account.address, TestAddress);
     });
 
-    it("Should get contraceFactory", async function () {
+    it("getSinger should return privateKey accounts", async function() {
+      // @ts-ignore
+      const signers = await this.hre.conflux.getSigners();
+      assert.equal(signers.length, 1);
+      assert.equal(signers[0].address, TestAddress);
+    });
+
+    it("Should return Contract instance from getContractFactory", async function () {
       // @ts-ignore
       const Greeter = await this.hre.conflux.getContractFactory('Greeter');
       const receipt = await Greeter.constructor('Hello').sendTransaction({
