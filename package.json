@@ -1,8 +1,8 @@
 {
   "name": "hardhat-conflux",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Hardhat js-conflux-sdk plugin",
-  "repository": "github:nomiclabs/hardhat-ts-plugin-boilerplate",
+  "repository": "github:conflux-chain/hardhat-conflux",
   "author": "Pana.W<pana.wang@outlook.com>",
   "license": "MIT",
   "main": "dist/src/index.js",
