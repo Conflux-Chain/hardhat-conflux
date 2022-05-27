@@ -32,34 +32,46 @@ This plugin creates no additional tasks.
 
 This plugins adds an `ConfluxSDK` object to the Hardhat Runtime Environment.
 
-This object has the same API as `js-conflux-sdk`, with some extra Hardhat-specific functionality.
+This object has the same API as `js-conflux-sdk`
 
 ### Conflux object
 
-A `conflux` field is added to Hardhat Runtime Environment, which is an `Conflux` instance automatically connected to the selected network.
+A `conflux` field is added to Hardhat Runtime Environment, which is an `Conflux` instance automatically connected to the selected network, with some extra Hardhat-specific functionality.
 
 ### Helpers
 
 These helpers are added to the `conflux` object:
 
 ```js
-function getContractFactory(name: string): Promise<conflux.Contract>;
+function getContractFactory(name: string): Promise<ConfluxSDK.Contract>;
 
-function getContractFactory(abi: any[], bytecode: string): Promise<conflux.Contract>;
+function getContractFactory(abi: any[], bytecode: string): Promise<ConfluxSDK.Contract>;
 
-function getContractAt(name: string, address: string): Promise<conflux.Contract>;
+function getContractAt(name: string, address: string): Promise<ConfluxSDK.Contract>;
 
-function getContractAt(abi: any[], address: string): Promise<conflux.Contract>;
+function getContractAt(abi: any[], address: string): Promise<ConfluxSDK.Contract>;
+
+function getSigners(): Promise<ConfluxSDK.PrivateKeyAccount[]>;
 ```
 
 ## Usage
 
 There are no additional steps you need to take for this plugin to work.
 
-Install it and access ethers through the Hardhat Runtime Environment anywhere you need it (tasks, scripts, tests, etc). For example, in your hardhat.config.js:
+Install it and access `conflux` through the Hardhat Runtime Environment anywhere you need it (tasks, scripts, tests, etc). For example, in your hardhat.config.js:
 
 ```js
 require("hardhat-conflux");
+
+/*
+// Add conflux network (mainnet or testnet) to hardhat networks
+
+confluxTestnet: {
+  url: "https://test.confluxrpc.com",
+  accounts: [HARDHAT_TEST_KEY],
+  chainId: 1,
+}
+*/
 
 // task action function receives the Hardhat Runtime Environment as second argument
 task(

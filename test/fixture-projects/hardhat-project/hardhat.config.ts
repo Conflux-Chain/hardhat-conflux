@@ -14,7 +14,6 @@ const config: HardhatUserConfig = {
       url: "https://test.confluxrpc.com",
       accounts: [HARDHAT_TEST_KEY],
       chainId: 1,
-      gasMultiplier: 1.3
     }
   }
 };
