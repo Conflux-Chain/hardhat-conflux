@@ -110,3 +110,7 @@ const hash = await greeter.setGreeting('new greet').sendTransaction({
   from: defaultAccount.address,
 });
 ```
+
+## Example
+
+[hardhat-conflux-example](https://github.com/Conflux-Chain/hardhat-conflux-example)
