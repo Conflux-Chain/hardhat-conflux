@@ -63,3 +63,4 @@ typings/
 .env
 target.md
 test/fixture-projects/hardhat-project/cache/
+.DS_Store
