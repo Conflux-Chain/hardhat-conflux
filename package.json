@@ -1,6 +1,6 @@
 {
   "name": "hardhat-conflux",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Hardhat js-conflux-sdk plugin",
   "repository": "github:conflux-chain/hardhat-conflux",
   "author": "Pana.W<pana.wang@outlook.com>",
