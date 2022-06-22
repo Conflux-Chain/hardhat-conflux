@@ -45,20 +45,13 @@ export async function getSigners(
   return accounts.map((privateKey) => new PrivateKeyAccount(privateKey, chainId as number));
 }
 
-/* export async function getSigner(
+export async function getSigner(
   hre: HardhatRuntimeEnvironment,
   address: string
-): Promise<SignerWithAddress> {
-  const { SignerWithAddress: SignerWithAddressImpl } = await import(
-    "../signers"
-  );
-
-  const signer = hre.ethers.provider.getSigner(address);
-
-  const signerWithAddress = await SignerWithAddressImpl.create(signer);
-
-  return signerWithAddress;
-} */
+): Promise<PrivateKeyAccount | undefined> {
+  const signers = await getSigners(hre);
+  return signers.find((signer) => signer.address === address);
+}
 
 export function getContractFactory(
   hre: HardhatRuntimeEnvironment,

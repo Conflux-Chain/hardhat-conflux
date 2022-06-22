@@ -26,7 +26,12 @@ import "hardhat-conflux";
 
 ## Tasks
 
-This plugin creates no additional tasks.
+This plugin provides the `verifyCfxContract` task, which allows you to verify contracts through Etherscan's service.
+
+```sh
+# npx hardhat verifyCfxContract CONTRACT_NAME DEPLOYED_CONTRACT_ADDRESS
+$ npx hardhat verifyCfxContract Greeter cfxtest:acba7cvb1k6bhctzsfshybg5zgch39gnpuc8teem53
+```
 
 ## Environment extensions
 
