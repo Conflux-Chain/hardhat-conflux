@@ -95,7 +95,7 @@ module.exports = {};
 And deploy or interact with contract in tasks or scripts:
 
 ```js
-const signers = await hre.conflux.getSingers();
+const signers = await hre.conflux.getSigners();
 const defaultAccount = signers[0];
 // deploy contract
 const Greeter = await hre.conflux.getContractFactory('Greeter');
