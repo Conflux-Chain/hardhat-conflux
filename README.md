@@ -9,7 +9,7 @@ This plugin brings to Hardhat the `js-conflux-sdk`, which allows you to interact
 ## Installation
 
 ```bash
-npm install hardhat-conflux 'js-conflux-sdk@next'
+npm install hardhat-conflux js-conflux-sdk
 ```
 
 Import the plugin in your `hardhat.config.js`:
