@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const MainnetScanUrl = 'https://api.confluxscan.net';
-const TestnetScanUrl = 'https://api-testnet.confluxscan.net';
+const MainnetScanUrl = 'https://api.confluxscan.org';
+const TestnetScanUrl = 'https://api-testnet.confluxscan.org';
 
-// Scan contract verify openapi @see https://api-testnet.confluxscan.net/doc
+// Scan contract verify openapi @see https://api-testnet.confluxscan.org/doc
 
 /**
  * Valid codes 1-14 where
@@ -94,7 +94,7 @@ export async function checkVerifyStatus(guid: string, networkId?: number): Promi
 }
 
 async function getCompilerList() {
-  const url = 'https://confluxscan.net/v1/contract/compiler';
+  const url = 'https://confluxscan.org/v1/contract/compiler';
   const { data: versions } = await axios.get(url);
   return versions;
 }
