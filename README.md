@@ -8,6 +8,9 @@ This plugin brings to Hardhat the `js-conflux-sdk`, which allows you to interact
 
 ## Installation
 
+Use Node.js 22 or Node.js 24, Hardhat 2.29.2 or later
+within the 2.x series, and `js-conflux-sdk` 2.1.2 or later within the 2.x series.
+
 ```bash
 npm install hardhat-conflux js-conflux-sdk
 ```
@@ -119,3 +122,11 @@ const hash = await greeter.setGreeting('new greet').sendTransaction({
 ## Example
 
 [hardhat-conflux-example](https://github.com/Conflux-Chain/hardhat-conflux-example)
+
+## Dependency maintenance
+
+The development SDK is pinned to the minimum supported version to check compatibility.
+Mocha's `serialize-javascript` and Solc's `tmp` dependencies use targeted npm overrides
+because their upstream dependency ranges still select vulnerable versions. Keep these
+overrides until upstream includes the fixes. npm applies overrides only in the root
+project; applications using this plugin should audit their own dependency lockfiles.
